@@ -1,0 +1,27 @@
+# Excluir artefactos de compilación de Rust
+/target
+**/target
+
+# Ignorar archivos de entorno
+.env
+.env.*
+
+# Excluir control de versiones
+.git
+.gitignore
+
+# Dockerfile y docker-compose no deben incluirse en el contexto de build
+Dockerfile
+docker-compose.yml
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE/editor
+.vscode/
+.idea/
+*.swp
+
+# Archivos de documentación
+README.md
