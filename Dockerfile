@@ -14,6 +14,7 @@ RUN cargo build --release
 FROM ubuntu:20.04
 WORKDIR /app
 COPY --from=builder /app/target/release/server .
+COPY --from=builder /app/target/release/client .
 
 # Exponemos el puerto que usa el server
 EXPOSE 9000
