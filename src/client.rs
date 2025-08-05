@@ -5,7 +5,8 @@ use std::{
 
 fn main() -> io::Result<()> {
     // Conectar al servidor
-    let mut stream = TcpStream::connect("127.0.0.1:9000")?;
+    //let mut stream = TcpStream::connect("127.0.0.1:9000")?; //para localhost
+    let mut stream = TcpStream::connect("echo-server:9000")?; // para Docker
     // Clonar el socket para lectura independiente
     let mut reader = BufReader::new(stream.try_clone()?);
 
