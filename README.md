@@ -22,7 +22,7 @@ las dos opciones requieren el siguiente paso:
    docker network create echo-net
    ```
 
-2. **Arranca el server** en esa red, nombrándolo “echo-server”:
+2. **Arranca el server** en esa red, nombrándolo “echo-server”: // reemplaza -d por -t para ver su terminal
 
    ```
    docker run -d --name echo-server --network echo-net -p 9000:9000 chat-rust
@@ -43,20 +43,13 @@ docker rm -f $(docker ps -aq)
 docker system prune -a --volumes -f
 ```
 
-ADICIONAL:
 
-## otra Opción: Conectar vía Host-Network (no usar) (descomentar la ip de client.rs y comentar la otra)
 
-Si arrancas el contenedor del client en modo **host** (sólo Linux), éste comparte la pila de red del host:
-# 1) Arranca el server publicando puerto
-```
-docker run -d --name echo-server -p 9000:9000 chat-rust
-```
-# 2) Arranca el client usando la network del host
-```
-docker run -it --rm --network host chat-rust ./client
-```
+### automatizaciòn con el docker-compose.yml //use profile en client en el .yml
 
-Dentro del contenedor, `127.0.0.1:9000` ahora sí conecta al server que escucha en tu máquina (porque es “la misma” red).
 
-> **Contras**: no funciona en Docker Desktop Mac/Win, y pierde aislamiento de red.
+* `docker compose up` → arranca sólo **server**. (buildea y levanta client)
+* (`docker compose up --profile client` → arranca ambos.) (no usar)
+* `docker compose run client` → arranca sólo **client**, interactivo. (abri otra terminal y corre)
+//"docker compose down" en otra terminal para bajar client
+

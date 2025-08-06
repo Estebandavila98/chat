@@ -1,0 +1,30 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chat-rust
+    container_name: echo-server
+    ports:
+      - "9000:9000"
+    networks:
+      - echo-net
+
+  client:
+    profiles: ["client"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chat-rust
+    container_name: echo-client
+    depends_on:
+      - server
+    stdin_open: true   # habilita -i
+    tty: true          # habilita -t
+    networks:
+      - echo-net
+    command: ["./client"]
+
+networks:
+  echo-net:
+    driver: bridge
